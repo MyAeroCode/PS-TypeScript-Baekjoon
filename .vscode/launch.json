@@ -22,7 +22,8 @@
             "args": ["./**/*.spec.ts", "-t", "5000"],
             "cwd": "${workspaceRoot}",
             "internalConsoleOptions": "openOnSessionStart",
-            "skipFiles": ["<node_internals>/**", "node_modules/**"]
+            "skipFiles": ["<node_internals>/**", "node_modules/**"],
+            "preLaunchTask": "tsc: build - tsconfig.json"
         }
     ]
 }

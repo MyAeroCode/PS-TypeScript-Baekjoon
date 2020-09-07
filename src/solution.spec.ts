@@ -20,7 +20,7 @@ describe("테스트", function () {
 
     for (let i = 0; i < data.length; i++) {
         it(`케이스 ${i + 1}`, function () {
-            const output = cp.execFileSync("ts-node", ["./src/solution.ts"], {
+            const output = cp.execFileSync("node", ["./out/solution.js"], {
                 input: data[i].in,
             });
             deepStrictEqual(output.toString().trim(), data[i].ans.toString().trim());
