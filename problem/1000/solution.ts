@@ -1,6 +1,10 @@
-import fs from "fs";
+import readline from "readline";
+const { stdin, stdout } = process;
+const lines = [] as string[];
+const rl = readline.createInterface({ input: stdin, output: stdout });
+rl.on("line", (line) => lines.push(line)).on("close", solution);
 
-const input = fs.readFileSync(0).toString().split(" ");
-const a = Number(input[0]);
-const b = Number(input[1]);
-console.log(a + b);
+export function solution() {
+    const [a, b] = lines[0].split(" ").map(Number);
+    console.log(a + b);
+}
