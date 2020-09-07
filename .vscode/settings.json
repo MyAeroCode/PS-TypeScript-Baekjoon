@@ -1,0 +1,15 @@
+{
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+
+    //
+    // 모카에서 node 프로세스를 실행하기 위해 필수.
+    "debug.javascript.usePreview": false
+}
