@@ -1,29 +1,23 @@
 import { describe, it } from "mocha";
 import { deepStrictEqual } from "assert";
-import cp from "child_process";
+import { execSync } from "child_process";
 import fs from "fs";
-import path from "path";
 
 describe("테스트", function () {
-    const data = [] as { in: Buffer; ans: Buffer }[];
-    let cnt = 0;
-    while (true) {
+    const buf2str = (buf: Buffer) => buf.toString().trim();
+    for (let i = 1; true; ++i) {
+        let input: Buffer;
+        let actual: Buffer;
+        let expect: Buffer;
         try {
-            cnt++;
-            const nextIn = fs.readFileSync(path.join(__dirname, "data", `${cnt}`));
-            const nextAns = fs.readFileSync(path.join(__dirname, "data", `${cnt}-ans`));
-            data.push({ in: nextIn, ans: nextAns });
+            input = fs.readFileSync(`./src/data/${i}`);
+            actual = execSync(`node ./out/solution.js`, { input });
+            expect = fs.readFileSync(`./src/data/${i}-ans`);
         } catch (e) {
             break;
         }
-    }
-
-    for (let i = 0; i < data.length; i++) {
-        it(`케이스 ${i + 1}`, function () {
-            const output = cp.execFileSync("node", ["./out/solution.js"], {
-                input: data[i].in,
-            });
-            deepStrictEqual(output.toString().trim(), data[i].ans.toString().trim());
+        it(`케이스 ${i}`, function () {
+            deepStrictEqual(buf2str(actual), buf2str(expect));
         });
     }
 });

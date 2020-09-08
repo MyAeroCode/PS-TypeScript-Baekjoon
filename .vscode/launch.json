@@ -7,7 +7,7 @@
             "request": "launch",
             "runtimeExecutable": "${env:HOME}/.nvm/versions/node/v12.18.3/bin/node",
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"],
-            "args": ["./src/solution.ts"],
+            "args": ["./src/solution.ts", "readFromInputFile"],
             "cwd": "${workspaceRoot}",
             "internalConsoleOptions": "openOnSessionStart",
             "skipFiles": ["<node_internals>/**", "node_modules/**"]
