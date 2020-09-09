@@ -1,18 +1,20 @@
-function solution(scanner = new Scanner()): string {
-    const output: number[] = [];
-    const N = scanner.getInt();
+function solution(io = new IO()): void {
+    const N = io.readInt();
     for (let i = 0; i < N; i++) {
-        const A = scanner.getInt();
-        const B = scanner.getInt();
-        output.push(A + B);
+        const A = io.readInt();
+        const B = io.readInt();
+        io.write(A + B);
     }
-    return output.join("\n");
+    io.flush();
 }
 //
-// 스캐너 객체
-const debugMode = process.argv.includes("readFromInputFile");
-class Scanner {
-    private buffer: Buffer = require("fs").readFileSync(debugMode ? "./src/stdin" : 0);
+// 입출력 객체
+class IO {
+    private readonly debugMode: boolean = process.argv.includes("readFromInputFile");
+    private readonly buffer: Buffer = require("fs").readFileSync(
+        this.debugMode ? "./src/stdin" : 0,
+    );
+    private readonly stdout: any[] = [];
     private cursor: number = 0;
     /**
      * 공백이 아닌 문자를 만날 때 까지 전진한다.
@@ -28,7 +30,7 @@ class Scanner {
     /**
      * 소수점 없는 부호화된 정수 하나를 읽는다.
      */
-    public getInt(): number {
+    public readInt(): number {
         const { buffer } = this;
         this.consumeWhiteSpace();
         const isNegative = buffer[this.cursor] === 45;
@@ -46,7 +48,7 @@ class Scanner {
     /**
      * 단어 하나를 읽는다.
      */
-    public getWord(): string {
+    public readWord(): string {
         const { buffer } = this;
         this.consumeWhiteSpace();
         const srt = this.cursor;
@@ -60,7 +62,7 @@ class Scanner {
     /**
      * 라인 하나를 읽는다.
      */
-    public getLine(): string {
+    public readLine(): string {
         const { buffer } = this;
         this.consumeWhiteSpace();
         const srt = this.cursor;
@@ -71,7 +73,27 @@ class Scanner {
         }
         return String.fromCharCode(...this.buffer.slice(srt, this.cursor)).trim();
     }
+    /**
+     * 메세지를 콘솔에 적는다.
+     * 채점 모드에서는 메세지를 버퍼에 삽입한다.
+     */
+    public write(message: any): void {
+        if (this.debugMode) {
+            console.log(message);
+        } else {
+            this.stdout.push(message);
+        }
+    }
+    /**
+     * 버퍼에 삽입된 메세지를 한꺼번에 출력하고, 프로그램을 종료한다.
+     */
+    public flush(): void {
+        if (this.debugMode) {
+            //
+        } else {
+            console.log(this.stdout.join("\n"));
+            process.exit(0);
+        }
+    }
 }
-const output = solution();
-debugMode ? console.log(output) : process.stdout.write(output);
-process.exit(0);
+solution();
