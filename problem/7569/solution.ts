@@ -1,23 +1,36 @@
+interface Point3D {
+    z: number;
+    y: number;
+    x: number;
+}
 function solution(io: NodeIO): void {
+    const deltas = [
+        { z: +1, y: 0, x: 0 },
+        { z: -1, y: 0, x: 0 },
+        { z: 0, y: +1, x: 0 },
+        { z: 0, y: -1, x: 0 },
+        { z: 0, y: 0, x: +1 },
+        { z: 0, y: 0, x: -1 },
+    ];
     let remain = 0;
-    let stack = [] as number[][];
-    let nextStack = [] as number[][];
+    let stack = [] as Point3D[];
+    let nextStack = [] as Point3D[];
     const [M, N, H] = [io.readInt(), io.readInt(), io.readInt()];
     const board = makeArray(H, (z) =>
         makeArray(N, (y) =>
             makeArray(M, (x) => {
                 const val = io.readInt();
                 if (val === 0) remain++;
-                if (val === 1) nextStack.push([z, y, x, 0]);
+                if (val === 1) nextStack.push({ z, y, x });
                 return val;
             }),
         ),
     );
-    function ripen(i: number, j: number, k: number) {
-        if (0 <= i && i < H && 0 <= j && j < N && 0 <= k && k < M) {
-            if (board[i][j][k] === 0) {
-                nextStack.push([i, j, k]);
-                board[i][j][k] = 1;
+    function ripen({ z, y, x }: Point3D) {
+        if (0 <= z && z < H && 0 <= y && y < N && 0 <= x && x < M) {
+            if (board[z][y][x] === 0) {
+                nextStack.push({ z, y, x });
+                board[z][y][x] = 1;
                 remain--;
             }
         }
@@ -28,13 +41,14 @@ function solution(io: NodeIO): void {
         stack = nextStack;
         nextStack = [];
         while (stack.length) {
-            const [i, j, k] = stack.pop()!;
-            ripen(i + 1, j, k);
-            ripen(i - 1, j, k);
-            ripen(i, j + 1, k);
-            ripen(i, j - 1, k);
-            ripen(i, j, k + 1);
-            ripen(i, j, k - 1);
+            const { z, y, x } = stack.pop()!;
+            for (const delta of deltas) {
+                ripen({
+                    z: z + delta.z,
+                    y: y + delta.y,
+                    x: x + delta.x,
+                });
+            }
         }
         ans++;
     }
