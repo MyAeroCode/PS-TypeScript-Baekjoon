@@ -1,3 +1,5 @@
+//
+// 틀렸습니다.
 function solution(io: NodeIO): void {
     const [srt, end] = [io.readInt(), io.readInt()];
     const targets = new Set();
