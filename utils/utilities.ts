@@ -19,11 +19,13 @@ type ContainerConstructor<T> = {
 function makeArray<L extends Container<any>>(
     holderConstructor: ContainerConstructor<L>,
     size: number,
-    initializer: (idx: number) => L[number],
+    initializer?: (idx: number) => L[number],
 ): L {
     const holder = new holderConstructor(size);
-    for (let i = 0; i < size; i++) {
-        holder[i] = initializer(i);
+    if (initializer) {
+        for (let i = 0; i < size; i++) {
+            holder[i] = initializer(i);
+        }
     }
     return holder;
 }
