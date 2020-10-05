@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "mocha -r ts-node/register ./src/**/*.spec.ts",
+        "test": "mocha -r ts-node/register ./src/solution.spec.ts",
         "start": "ts-node ./src/solution.ts"
     },
     "repository": {
