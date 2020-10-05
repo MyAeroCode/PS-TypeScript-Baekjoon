@@ -19,7 +19,7 @@
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
             "runtimeExecutable": "${env:HOME}/.nvm/versions/node/v12.18.3/bin/node",
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"],
-            "args": ["./**/*.spec.ts", "-t", "5000"],
+            "args": ["./src/solution.spec.ts", "-t", "5000"],
             "cwd": "${workspaceRoot}",
             "internalConsoleOptions": "openOnSessionStart",
             "skipFiles": ["<node_internals>/**", "node_modules/**"],
