@@ -1,8 +1,8 @@
 //
-// null 또는 undefined가 아닌 첫번째 값을 반환한다.
+// null, undefined, NaN이 아닌 첫번째 값을 반환한다.
 function collapse<T>(...vals: (T | undefined | null)[]): T {
     for (const val of vals) {
-        if (val === undefined || val === null) continue;
+        if (val === undefined || val === null || isNaN(val as any)) continue;
         return val;
     }
     throw new Error(`적어도 하나는 유효한 값이여야 합니다.`);
