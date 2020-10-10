@@ -1,5 +1,8 @@
-//
-// null, undefined, NaN이 아닌 첫번째 값을 반환한다.
+/**
+ * null, undefined, NaN이 아닌 첫번째 값을 반환한다.
+ *
+ * @author aerocode.net
+ */
 function collapse<T>(...vals: (T | undefined | null)[]): T {
     for (const val of vals) {
         if (val === undefined || val === null || isNaN(val as any)) continue;
@@ -16,6 +19,11 @@ type Container<T> = {
 type ContainerConstructor<T> = {
     new (size: number): T;
 };
+/**
+ * 주어진 배열 생성자와 이니셜라이져를 사용하여 배열을 생성한다.
+ *
+ * @author aerocode.net
+ */
 function makeArray<L extends Container<any>>(
     holderConstructor: ContainerConstructor<L>,
     size: number,
