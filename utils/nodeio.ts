@@ -82,14 +82,13 @@ class NodeIO {
         }
     }
     /**
-     * 버퍼에 삽입된 메세지를 한꺼번에 출력하고, 프로그램을 종료한다.
+     * 버퍼에 삽입된 메세지를 한꺼번에 출력한다.
      */
     public flush(): void {
         if (this.debug) {
             //
         } else {
-            console.log(this.stdout.join("\n"));
-            process.exit(0);
+            console.log(this.stdout.join(require("os").EOL));
         }
     }
 }
