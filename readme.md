@@ -78,11 +78,6 @@ const array = makeArray<number[]>(Array, 5);
 [0, 1, 2, 3, 4];
 
 //
-// Create Array of Number, Via Constant
-const array = makeArray<number[]>(Array, 5, 3);
-[3, 3, 3, 3, 3];
-
-//
 // Create Array of Number, Via Mapping function.
 const array = makeArray<number[]>(Array, 3, (i) => i * 2);
 [0, 2, 4];
