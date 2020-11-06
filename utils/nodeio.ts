@@ -88,10 +88,7 @@ class NodeIO {
         if (this.debug) {
             //
         } else {
-            console.log(this.stdout.join(require("os").EOL));
+            console.log(this.stdout.join("\n"));
         }
     }
 }
-const nodeIO = new NodeIO();
-// solution(nodeIO);
-nodeIO.flush();
