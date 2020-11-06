@@ -17,7 +17,10 @@ describe("테스트", function () {
             break;
         }
         it(`케이스 ${i}`, function () {
-            deepStrictEqual(buf2str(actual), buf2str(expect));
+            deepStrictEqual(
+                buf2str(actual).replace(/\r\n/g, "\n"),
+                buf2str(expect).replace(/\r\n/g, "\n"),
+            );
         });
     }
 });
