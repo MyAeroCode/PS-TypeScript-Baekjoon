@@ -319,3 +319,4 @@ export class FixedArrayAdaptor<L extends ArrayContainer<any>> {
 const nodeIO = new NodeIO();
 solution(nodeIO);
 nodeIO.flush();
+process.exit(0);
