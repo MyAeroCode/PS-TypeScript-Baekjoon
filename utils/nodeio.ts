@@ -71,6 +71,13 @@ class NodeIO {
         return this.buffer.slice(srt, this.cursor).toString("utf8");
     }
     /**
+     * 모든 입력을 읽는다.
+     */
+    public readAll(): string {
+        this.cursor = this.buffer.length;
+        return this.buffer.toString("utf-8");
+    }
+    /**
      * 메세지를 콘솔에 적는다.
      * 채점 모드에서는 메세지를 버퍼에 삽입한다.
      */
