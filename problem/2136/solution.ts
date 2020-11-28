@@ -20,19 +20,16 @@ function solution(io: NodeIO): void {
     // 왼쪽 또는 오른쪽으로 떨어지는 시각을 구한다.
     const l_elapsed = ants.filter((a) => a.dir === -1).map((a) => 0 + a.pos);
     const r_elapsed = ants.filter((a) => a.dir === +1).map((a) => L - a.pos);
+
+    //
+    // 좌측으로 늦게 떨어지는 개미의 추락시간과,
+    // 우측으로 늦게 떨어지는 개미의 추락시간을 계산한다.
     const l_elapsed_max = Math.max(...l_elapsed);
     const r_elapsed_max = Math.max(...r_elapsed);
 
     //
-    // 부딪힌 개미가 있는지 검사한다.
-    let isCrossed = false;
-    for (let i = 1; i < ants.length; i++) {
-        if (ants[i - 1].dir === +1 && ants[i].dir === -1) {
-            isCrossed = true;
-            break;
-        }
-    }
-
+    // 위치를 기준으로 정렬된 상태를 기준으로,
+    // 가장 늦게 떨어지는 개미의 인덱스를 구한다.
     const idx = l_elapsed.length + (l_elapsed_max > r_elapsed_max ? -1 : 0);
     io.write(`${ants[idx].idx} ${Math.max(l_elapsed_max, r_elapsed_max)}`);
 }
