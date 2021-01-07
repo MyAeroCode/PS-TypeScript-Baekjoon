@@ -1,16 +1,13 @@
-//
-// 지수가 클 때, 잘 작동되지 않음.
-// 디버깅 한번 해볼 것.
 function solution(io: NodeIO): void {
     const mod = 1000000007n;
-    const A = BigInt(io.readLine()) % mod;
-    const B = BigInt(io.readLine()) % mod;
+    const A = BigInt(io.readLine());
+    const B = BigInt(io.readLine());
 
     let answer = 1n;
     let remains = B;
     let pows = A % mod;
     while (remains) {
-        if ((remains & 1n) === 1n) {
+        if (remains & 1n) {
             answer = (answer * pows) % mod;
         }
         remains >>= 1n;
